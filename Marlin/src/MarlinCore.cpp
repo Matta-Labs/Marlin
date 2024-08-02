@@ -865,6 +865,7 @@ void idle(const bool no_stepper_sleep/*=false*/) {
       TERN_(AUTO_REPORT_FANS, fan_check.auto_reporter.tick());
       TERN_(AUTO_REPORT_SD_STATUS, card.auto_reporter.tick());
       TERN_(AUTO_REPORT_POSITION, position_auto_reporter.tick());
+      TERN_(AUTO_REPORT_POSITION, real_time_position_auto_reporter.tick());
       TERN_(BUFFER_MONITORING, queue.auto_report_buffer_statistics());
     }
   #endif

@@ -225,7 +225,21 @@ void report_real_position() {
   TERN_(HAS_POSITION_MODIFIERS, planner.unapply_modifiers(npos, true));
 
   report_logical_position(npos);
-  report_more_positions();
+  // report_more_positions();
+}
+
+// Report the real current position according to the steppers with timestamps.
+// Forward kinematics and un-leveling are applied.
+void report_real_position_with_time() {
+  // report time at the beginning of the line
+  SERIAL_ECHOPGM("TIME:");
+  SERIAL_ECHO(millis());
+  SERIAL_ECHOPGM(" ");
+  report_real_position();
+  // report time at the end of the line
+  SERIAL_ECHOPGM("TIME:");
+  SERIAL_ECHO(millis());
+  SERIAL_EOL();
 }
 
 // Report the logical current position according to the most recent G-code command
@@ -247,6 +261,7 @@ void report_current_position_projected() {
 
 #if ENABLED(AUTO_REPORT_POSITION)
   AutoReporter<PositionReport> position_auto_reporter;
+  AutoReporter<RealTimePositionReport> real_time_position_auto_reporter;
 #endif
 
 #if ANY(FULL_REPORT_TO_HOST_FEATURE, REALTIME_REPORTING_COMMANDS)

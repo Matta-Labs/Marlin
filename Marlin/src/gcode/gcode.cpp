@@ -638,6 +638,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
 
       #if ENABLED(AUTO_REPORT_POSITION)
         case 154: M154(); break;                                  // M154: Set position auto-report interval
+        case 174: M174(); break;                                  // M174: Set position auto-report for realtime
       #endif
 
       #if ALL(AUTO_REPORT_TEMPERATURES, HAS_TEMP_SENSOR)

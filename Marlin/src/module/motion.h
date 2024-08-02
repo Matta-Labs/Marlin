@@ -254,6 +254,7 @@ inline float home_bump_mm(const AxisEnum axis) {
 #endif // !HAS_SOFTWARE_ENDSTOPS
 
 void report_real_position();
+void report_real_position_with_time();
 void report_current_position();
 void report_current_position_projected();
 
@@ -261,6 +262,8 @@ void report_current_position_projected();
   #include "../libs/autoreport.h"
   struct PositionReport { static void report() { report_current_position_projected(); } };
   extern AutoReporter<PositionReport> position_auto_reporter;
+  struct RealTimePositionReport { static void report() { report_real_position_with_time(); } };
+  extern AutoReporter<RealTimePositionReport> real_time_position_auto_reporter;  
 #endif
 
 #if ANY(FULL_REPORT_TO_HOST_FEATURE, REALTIME_REPORTING_COMMANDS)
